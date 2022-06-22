@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Lesson10_K</string>
+    <string name="btnShowFile">Просмотреть файл</string>
+    <string name="btnEditFile">Редактировать файл</string>
+    <string name="btnSettings">Настройки</string>
+    <string name="btnCreateFile">Создать файл</string>
+    <string name="txtViewSize">Выберете размер текста</string>
+    <string name="txtViewColor">Выберете цвет текста</string>
+    <string name="radioTen">10</string>
+    <string name="radioTwenty">20</string>
+    <string name="radioThirty">30</string>
+    <string name="radioBlack">Чёрный</string>
+    <string name="radioGreen">Зеленый</string>
+    <string name="radioPurple">Фиолетовый</string>
+</resources>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtViewSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingBottom="15dp"
+        android:scrollbars="vertical"
+        android:text="@string/txtViewSize"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupSize"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <RadioButton
+            android:id="@+id/tenSize"
+            android:layout_width="250dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/radioTen" />
+
+        <RadioButton
+            android:id="@+id/twentySize"
+            android:layout_width="250dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/radioTwenty" />
+
+        <RadioButton
+            android:id="@+id/thirtySize"
+            android:layout_width="250dp"
+            android:layout_height="20dp"
+            android:text="@string/radioThirty" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txtViewColor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="15dp"
+        android:scrollbars="vertical"
+        android:text="@string/txtViewColor"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupColor"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <RadioButton
+            android:id="@+id/blackColor"
+            android:layout_width="250dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/radioBlack" />
+
+        <RadioButton
+            android:id="@+id/greenColor"
+            android:layout_width="250dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/radioGreen" />
+
+        <RadioButton
+            android:id="@+id/purpleColor"
+            android:layout_width="250dp"
+            android:layout_height="20dp"
+            android:text="@string/radioPurple" />
+
+    </RadioGroup>
+
+</LinearLayout>
