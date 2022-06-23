@@ -1,17 +1,20 @@
 package com.example.lesson10_k
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.util.TypedValue
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.lesson10_k.MainActivity.Companion.FILE_NAME
 import java.io.*
 
 class WorkWithFIleActivity : AppCompatActivity() {
     private lateinit var editTextFile: EditText
-
-    private val FILE_NAME = "data.txt"
 
     private fun findViewById() {
         editTextFile = findViewById(R.id.editTextFile)
@@ -23,16 +26,15 @@ class WorkWithFIleActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
         return true
     }
 
     private fun saveText() {
         var fos: FileOutputStream? = null
-
         try {
             val text = editTextFile.text.toString()
-
             fos = openFileOutput(FILE_NAME, MODE_PRIVATE)
             fos.write(text.toByteArray())
             Toast.makeText(this, "Файл сохранен", Toast.LENGTH_SHORT).show()
@@ -79,13 +81,11 @@ class WorkWithFIleActivity : AppCompatActivity() {
         openText()
     }
 
-
     override fun onPause() {
         saveText()
         super.onPause()
     }
 
-    //?????
     override fun onDestroy() {
         super.onDestroy()
     }

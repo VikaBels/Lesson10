@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import java.io.File
 
@@ -15,6 +14,13 @@ class MainActivity : AppCompatActivity() {
 
     private var txtEditFile: String = "Редактировать файл"
     private var txtCreateFile: String = "Создать файл"
+
+    private var fileExist: Boolean = true
+    private lateinit var pathFile: String
+
+    companion object {
+        const val FILE_NAME = "data.txt"
+    }
 
     private fun findViewById() {
         btnShowFile = findViewById(R.id.btnShowFile)
@@ -29,14 +35,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showToOrThreeButtons() {
-        val fileExist: Boolean = true
+        pathFile = getFileStreamPath(FILE_NAME).toString()
 
-        if (fileExist) {
+        if (File(pathFile).exists()) {
             btnWorkWithFile.text = txtEditFile
+            fileExist = true
         } else {
             btnShowFile.visibility = View.GONE;
             btnWorkWithFile.text = txtCreateFile
+            fileExist = false
         }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +64,10 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.btnWorkWithFile -> {
+                    if (!fileExist) {
+                        File(pathFile).createNewFile()
+                    }
+
                     val intent = Intent(this, WorkWithFIleActivity::class.java)
                     startActivity(intent)
                 }
@@ -67,8 +80,7 @@ class MainActivity : AppCompatActivity() {
         }
         setOnClickListener(allButton)
     }
-
-    //?????
+    
     override fun onDestroy() {
         super.onDestroy()
     }
