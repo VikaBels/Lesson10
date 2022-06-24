@@ -12,4 +12,7 @@
     <string name="radioBlack">Чёрный</string>
     <string name="radioGreen">Зеленый</string>
     <string name="radioPurple">Фиолетовый</string>
+    <string name="editFile">Редактировать файл</string>
+    <string name="addFile">Создать файл</string>
+    <string name="fileIsSaved">Файл сохранен</string>
 </resources>

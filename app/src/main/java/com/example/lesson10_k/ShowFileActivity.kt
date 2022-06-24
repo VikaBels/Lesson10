@@ -1,6 +1,7 @@
 package com.example.lesson10_k
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -13,22 +14,23 @@ import java.io.InputStreamReader
 
 
 class ShowFileActivity : AppCompatActivity() {
-    private lateinit var txtViewTextFile: TextView
+    private var txtViewTextFile: TextView? = null
+
+    private var emptyLine: String? = ""
+
 
     private fun findViewById() {
         txtViewTextFile = findViewById(R.id.txtViewTextFile)
     }
 
     private fun getValueSize(): Float {
-        val sp = PreferenceManager
-            .getDefaultSharedPreferences(this) // this - контекст
+        val sp = getSharedPreferences(emptyLine, Context.MODE_PRIVATE)
         return sp.getFloat(SettingsActivity.KEY_SIZE_VALUE, 20F)
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun getValueColor(): Int {
-        val sp = PreferenceManager
-            .getDefaultSharedPreferences(this) // this - контекст
+        val sp = getSharedPreferences(emptyLine, Context.MODE_PRIVATE)
         return sp.getInt(SettingsActivity.KEY_COLOR_VALUE, resources.getColor(R.color.black, null))
     }
 
@@ -39,13 +41,13 @@ class ShowFileActivity : AppCompatActivity() {
             )
         )
         var str: String?
-        var txtForTextEdit = ""
+        var txtForTextEdit = emptyLine
         var i = 0
         while (br.readLine().also { str = it } != null) {
             i++
             txtForTextEdit += "$i. $str\n"
         }
-        txtViewTextFile.setText(txtForTextEdit, TextView.BufferType.EDITABLE);
+        txtViewTextFile?.setText(txtForTextEdit, TextView.BufferType.EDITABLE);
     }
 
     private fun changeAppBar() {
@@ -68,13 +70,15 @@ class ShowFileActivity : AppCompatActivity() {
 
         changeAppBar()
 
-        txtViewTextFile.setTextColor(getValueColor());
-        txtViewTextFile.textSize = getValueSize()
+        txtViewTextFile?.setTextColor(getValueColor());
+        txtViewTextFile?.textSize = getValueSize()
 
         readLineByLine()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+
+        txtViewTextFile = null
     }
 }

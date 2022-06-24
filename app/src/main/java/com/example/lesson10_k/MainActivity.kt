@@ -7,13 +7,11 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import java.io.File
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var btnShowFile: Button
-    private lateinit var btnWorkWithFile: Button
-    private lateinit var btnSettings: Button
 
-    private var txtEditFile: String = "Редактировать файл"
-    private var txtCreateFile: String = "Создать файл"
+class MainActivity : AppCompatActivity() {
+    private  var btnShowFile: Button? =null
+    private  var btnWorkWithFile: Button? =null
+    private  var btnSettings: Button? =null
 
     private var fileExist: Boolean = true
     private lateinit var pathFile: String
@@ -29,20 +27,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setOnClickListener(allButton: View.OnClickListener?) {
-        btnShowFile.setOnClickListener(allButton)
-        btnWorkWithFile.setOnClickListener(allButton)
-        btnSettings.setOnClickListener(allButton)
+        btnShowFile?.setOnClickListener(allButton)
+        btnWorkWithFile?.setOnClickListener(allButton)
+        btnSettings?.setOnClickListener(allButton)
     }
 
     private fun showToOrThreeButtons() {
         pathFile = getFileStreamPath(FILE_NAME).toString()
 
         if (File(pathFile).exists()) {
-            btnWorkWithFile.text = txtEditFile
+            btnWorkWithFile?.text = resources.getString(R.string.editFile)
             fileExist = true
         } else {
-            btnShowFile.visibility = View.GONE;
-            btnWorkWithFile.text = txtCreateFile
+            btnShowFile?.visibility = View.GONE;
+            btnWorkWithFile?.text = resources.getString(R.string.addFile)
             fileExist = false
         }
 
@@ -80,8 +78,12 @@ class MainActivity : AppCompatActivity() {
         }
         setOnClickListener(allButton)
     }
-    
+
     override fun onDestroy() {
         super.onDestroy()
+
+        btnShowFile = null
+        btnWorkWithFile = null
+        btnSettings = null
     }
 }

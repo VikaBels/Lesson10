@@ -1,5 +1,6 @@
 package com.example.lesson10_k
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -10,13 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 
 
 class SettingsActivity : AppCompatActivity() {
-    private lateinit var radioTen: RadioButton
-    private lateinit var radioTwenty: RadioButton
-    private lateinit var radioThirty: RadioButton
+    private var radioTen: RadioButton? = null
+    private var radioTwenty: RadioButton? = null
+    private var radioThirty: RadioButton? = null
 
-    private lateinit var radioBlack: RadioButton
-    private lateinit var radioGreen: RadioButton
-    private lateinit var radioPurple: RadioButton
+    private var radioBlack: RadioButton? = null
+    private var radioGreen: RadioButton? = null
+    private var radioPurple: RadioButton? = null
 
     private var sizeText: Float = 20F
     private var colorText: Int = -16777216
@@ -47,17 +48,16 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun setOnClickListener(allButton: View.OnClickListener?) {
-        radioTen.setOnClickListener(allButton)
-        radioTwenty.setOnClickListener(allButton)
-        radioThirty.setOnClickListener(allButton)
-        radioBlack.setOnClickListener(allButton)
-        radioGreen.setOnClickListener(allButton)
-        radioPurple.setOnClickListener(allButton)
+        radioTen?.setOnClickListener(allButton)
+        radioTwenty?.setOnClickListener(allButton)
+        radioThirty?.setOnClickListener(allButton)
+        radioBlack?.setOnClickListener(allButton)
+        radioGreen?.setOnClickListener(allButton)
+        radioPurple?.setOnClickListener(allButton)
     }
 
     private fun updateValues(firstValue: Float, secondValue: Int) {
-        val sp = PreferenceManager
-            .getDefaultSharedPreferences(this) // this - контекст
+        val sp = getSharedPreferences("", Context.MODE_PRIVATE)
         val editor = sp.edit()
         editor.putFloat(KEY_SIZE_VALUE, firstValue)
         editor.putInt(KEY_COLOR_VALUE, secondValue)
@@ -73,8 +73,8 @@ class SettingsActivity : AppCompatActivity() {
 
         findViewById()
 
-        radioTwenty.isChecked = true
-        radioBlack.isChecked = true
+        radioTwenty?.isChecked = true
+        radioBlack?.isChecked = true
 
         changeAppBar()
 
@@ -114,6 +114,14 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+
+        radioTen = null
+        radioTwenty = null
+        radioThirty = null
+
+        radioBlack = null
+        radioGreen = null
+        radioPurple = null
     }
 
 }

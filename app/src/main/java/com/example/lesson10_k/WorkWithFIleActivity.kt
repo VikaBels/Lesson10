@@ -14,7 +14,7 @@ import com.example.lesson10_k.MainActivity.Companion.FILE_NAME
 import java.io.*
 
 class WorkWithFIleActivity : AppCompatActivity() {
-    private lateinit var editTextFile: EditText
+    private var editTextFile: EditText? = null
 
     private fun findViewById() {
         editTextFile = findViewById(R.id.editTextFile)
@@ -34,10 +34,11 @@ class WorkWithFIleActivity : AppCompatActivity() {
     private fun saveText() {
         var fos: FileOutputStream? = null
         try {
-            val text = editTextFile.text.toString()
+            val text = editTextFile?.text.toString()
             fos = openFileOutput(FILE_NAME, MODE_PRIVATE)
             fos.write(text.toByteArray())
-            Toast.makeText(this, "Файл сохранен", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, resources.getString(R.string.fileIsSaved), Toast.LENGTH_SHORT)
+                .show()
 
         } catch (ex: IOException) {
             Toast.makeText(this, ex.message, Toast.LENGTH_SHORT).show()
@@ -58,7 +59,7 @@ class WorkWithFIleActivity : AppCompatActivity() {
             val bytes = ByteArray(fin.available())
             fin.read(bytes)
             val text = String(bytes)
-            editTextFile.setText(text, TextView.BufferType.EDITABLE);
+            editTextFile?.setText(text, TextView.BufferType.EDITABLE);
         } catch (ex: IOException) {
             Toast.makeText(this, ex.message, Toast.LENGTH_SHORT).show()
         } finally {
@@ -88,5 +89,7 @@ class WorkWithFIleActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        
+        editTextFile = null
     }
 }
