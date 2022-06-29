@@ -89,7 +89,7 @@ class WorkWithFIleActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        
+
         editTextFile = null
     }
 }

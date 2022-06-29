@@ -9,18 +9,18 @@ import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
-    private  var btnShowFile: Button? =null
-    private  var btnWorkWithFile: Button? =null
-    private  var btnSettings: Button? =null
-
-    private var fileExist: Boolean = true
-    private lateinit var pathFile: String
-
     companion object {
         const val FILE_NAME = "data.txt"
     }
 
-    private fun findViewById() {
+    private var btnShowFile: Button? = null
+    private var btnWorkWithFile: Button? = null
+    private var btnSettings: Button? = null
+
+    private var fileExist: Boolean = true
+    private lateinit var pathFile: String
+
+    private fun findViewsById() {
         btnShowFile = findViewById(R.id.btnShowFile)
         btnWorkWithFile = findViewById(R.id.btnWorkWithFile)
         btnSettings = findViewById(R.id.btnSettings)
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         btnSettings?.setOnClickListener(allButton)
     }
 
-    private fun showToOrThreeButtons() {
+    private fun showTwoOrThreeButtons() {
         pathFile = getFileStreamPath(FILE_NAME).toString()
 
         if (File(pathFile).exists()) {
@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById()
+        findViewsById()
 
-        showToOrThreeButtons()
+        showTwoOrThreeButtons()
 
         val allButton = View.OnClickListener { v ->
             when (v.id) {

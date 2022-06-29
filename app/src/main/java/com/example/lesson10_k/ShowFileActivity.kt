@@ -14,23 +14,24 @@ import java.io.InputStreamReader
 
 
 class ShowFileActivity : AppCompatActivity() {
+    companion object {
+        const val EMPTY_LINE = ""
+    }
+
     private var txtViewTextFile: TextView? = null
-
-    private var emptyLine: String? = ""
-
 
     private fun findViewById() {
         txtViewTextFile = findViewById(R.id.txtViewTextFile)
     }
 
     private fun getValueSize(): Float {
-        val sp = getSharedPreferences(emptyLine, Context.MODE_PRIVATE)
+        val sp = getSharedPreferences(EMPTY_LINE, Context.MODE_PRIVATE)
         return sp.getFloat(SettingsActivity.KEY_SIZE_VALUE, 20F)
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun getValueColor(): Int {
-        val sp = getSharedPreferences(emptyLine, Context.MODE_PRIVATE)
+        val sp = getSharedPreferences(EMPTY_LINE, Context.MODE_PRIVATE)
         return sp.getInt(SettingsActivity.KEY_COLOR_VALUE, resources.getColor(R.color.black, null))
     }
 
@@ -41,11 +42,12 @@ class ShowFileActivity : AppCompatActivity() {
             )
         )
         var str: String?
-        var txtForTextEdit = emptyLine
+        var txtForTextEdit = EMPTY_LINE
         var i = 0
         while (br.readLine().also { str = it } != null) {
             i++
             txtForTextEdit += "$i. $str\n"
+
         }
         txtViewTextFile?.setText(txtForTextEdit, TextView.BufferType.EDITABLE);
     }

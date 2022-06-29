@@ -11,6 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 
 
 class SettingsActivity : AppCompatActivity() {
+    companion object {
+        const val KEY_SIZE_VALUE = "sizeValue"
+        const val KEY_COLOR_VALUE = "colorValue"
+    }
+
     private var radioTen: RadioButton? = null
     private var radioTwenty: RadioButton? = null
     private var radioThirty: RadioButton? = null
@@ -21,11 +26,6 @@ class SettingsActivity : AppCompatActivity() {
 
     private var sizeText: Float = 20F
     private var colorText: Int = -16777216
-
-    companion object {
-        const val KEY_SIZE_VALUE = "sizeValue"
-        const val KEY_COLOR_VALUE = "colorValue"
-    }
 
     private fun findViewById() {
         radioTen = findViewById(R.id.tenSize)
@@ -56,7 +56,7 @@ class SettingsActivity : AppCompatActivity() {
         radioPurple?.setOnClickListener(allButton)
     }
 
-    private fun updateValues(firstValue: Float, secondValue: Int) {
+    private fun updateSizeColorTxt(firstValue: Float, secondValue: Int) {
         val sp = getSharedPreferences("", Context.MODE_PRIVATE)
         val editor = sp.edit()
         editor.putFloat(KEY_SIZE_VALUE, firstValue)
@@ -64,7 +64,6 @@ class SettingsActivity : AppCompatActivity() {
 
         editor.apply()
     }
-
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,8 +106,7 @@ class SettingsActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onPause() {
-        updateValues(sizeText, colorText)
-
+        updateSizeColorTxt(sizeText, colorText)
         super.onPause()
     }
 
@@ -123,5 +121,4 @@ class SettingsActivity : AppCompatActivity() {
         radioGreen = null
         radioPurple = null
     }
-
 }
