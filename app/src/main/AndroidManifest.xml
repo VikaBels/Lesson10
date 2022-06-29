@@ -20,7 +20,7 @@
             android:name=".ShowFileActivity"
             android:exported="false" />
         <activity
-            android:name=".WorkWithFIleActivity"
+            android:name=".EditFIleActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -33,17 +33,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showTwoOrThreeButtons() {
-        pathFile = getFileStreamPath(FILE_NAME).toString()
+        pathFile = filesDir.absolutePath + "/$FILE_NAME"
 
         if (File(pathFile).exists()) {
             btnWorkWithFile?.text = resources.getString(R.string.editFile)
             fileExist = true
+            btnShowFile?.visibility = View.VISIBLE
         } else {
-            btnShowFile?.visibility = View.GONE;
+            btnShowFile?.visibility = View.GONE
             btnWorkWithFile?.text = resources.getString(R.string.addFile)
             fileExist = false
         }
+    }
 
+    override fun onStart() {
+        super.onStart()
+        showTwoOrThreeButtons()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,8 +56,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         findViewsById()
-
-        showTwoOrThreeButtons()
 
         val allButton = View.OnClickListener { v ->
             when (v.id) {
@@ -66,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                         File(pathFile).createNewFile()
                     }
 
-                    val intent = Intent(this, WorkWithFIleActivity::class.java)
+                    val intent = Intent(this, EditFIleActivity::class.java)
                     startActivity(intent)
                 }
 
