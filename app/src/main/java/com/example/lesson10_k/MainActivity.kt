@@ -7,7 +7,6 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import java.io.File
 
-
 class MainActivity : AppCompatActivity() {
     companion object {
         const val FILE_NAME = "data.txt"
@@ -33,9 +32,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showTwoOrThreeButtons() {
-        pathFile = filesDir.absolutePath + "/$FILE_NAME"
-
-        if (File(pathFile).exists()) {
+        if (File(getFileStreamPath(FILE_NAME).toString()).exists()) {
             btnWorkWithFile?.text = resources.getString(R.string.editFile)
             fileExist = true
             btnShowFile?.visibility = View.VISIBLE

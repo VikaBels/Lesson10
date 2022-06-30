@@ -1,9 +1,7 @@
 package com.example.lesson10_k
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lesson10_k.MainActivity.Companion.FILE_NAME
@@ -39,14 +37,14 @@ class EditFIleActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("RestrictedApi")
+
     private fun openText() {
         try {
             openFileInput(FILE_NAME).use { fin ->
                 val bytes = ByteArray(fin.available())
                 fin.read(bytes)
                 val text = String(bytes)
-                editTextFile?.setText(text, TextView.BufferType.EDITABLE)
+                editTextFile?.setText(text)
             }
         } catch (noFile: FileNotFoundException) {
             noFile.printStackTrace()

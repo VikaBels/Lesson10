@@ -28,18 +28,23 @@ class ShowFileActivity : AppCompatActivity() {
 
     private fun getValueSize(): Float {
         val sp = getSharedPreferences(EMPTY_LINE, Context.MODE_PRIVATE)
-        return sp.getFloat(SettingsActivity.KEY_SIZE_VALUE, resources.getDimension(R.dimen.text_twenty))
+        return sp.getFloat(
+            SettingsActivity.KEY_SIZE_VALUE,
+            resources.getDimension(R.dimen.text_twenty)
+        )
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun getValueColor(): Int {
         val sp = getSharedPreferences(EMPTY_LINE, Context.MODE_PRIVATE)
-        return sp.getInt(SettingsActivity.KEY_COLOR_VALUE,ContextCompat.getColor(applicationContext, R.color.black))
+        return sp.getInt(
+            SettingsActivity.KEY_COLOR_VALUE,
+            ContextCompat.getColor(applicationContext, R.color.black)
+        )
     }
 
     private fun readLineByLine() {
-        try{
-            BufferedReader(InputStreamReader(openFileInput(FILE_NAME))).use { br->
+        try {
+            BufferedReader(InputStreamReader(openFileInput(FILE_NAME))).use { br ->
                 var str: String?
                 val txtForTextEdit = StringBuilder()
                 var i = 0
@@ -49,7 +54,7 @@ class ShowFileActivity : AppCompatActivity() {
                 }
                 txtViewTextFile?.text = txtForTextEdit.toString()
             }
-        }catch (noFile: FileNotFoundException) {
+        } catch (noFile: FileNotFoundException) {
             noFile.printStackTrace()
         }
     }
@@ -64,8 +69,6 @@ class ShowFileActivity : AppCompatActivity() {
         return true
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_file)

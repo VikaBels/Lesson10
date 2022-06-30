@@ -1,16 +1,11 @@
 package com.example.lesson10_k
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-
 
 class SettingsActivity : AppCompatActivity() {
     companion object {
@@ -45,7 +40,6 @@ class SettingsActivity : AppCompatActivity() {
         return true
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun updateSizeColorTxt(firstValue: Float?, secondValue: Int?) {
         val sp = getSharedPreferences("", Context.MODE_PRIVATE)
         val editor = sp.edit()
@@ -65,11 +59,9 @@ class SettingsActivity : AppCompatActivity() {
         editor.apply()
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun setOnCheckedChangeListeners() {
         radioGroupSize?.setOnCheckedChangeListener { _, checkedId -> // checkedId is the RadioButton selected
-            val rb = findViewById<View>(checkedId) as RadioButton
-            when (rb.id) {
+            when (checkedId) {
                 R.id.tenSize -> {
                     sizeText = resources.getDimension(R.dimen.text_ten)
                 }
@@ -83,8 +75,7 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         radioGroupColor?.setOnCheckedChangeListener { _, checkedId ->
-            val rb = findViewById<View>(checkedId) as RadioButton
-            when (rb.id) {
+            when (checkedId) {
                 R.id.blackColor -> {
                     colorText = ContextCompat.getColor(applicationContext, R.color.black)
                 }
@@ -98,7 +89,6 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -113,7 +103,6 @@ class SettingsActivity : AppCompatActivity() {
         setOnCheckedChangeListeners()
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onPause() {
         updateSizeColorTxt(sizeText, colorText)
         super.onPause()
